@@ -1,8 +1,25 @@
+#!/usr/bin/env node
 const fse = require("fs-extra");
 const path = require("path");
 const download = require("download-git-repo");
-//1.只能在有 node_modules 的项目中使用
+const ora = require("ora");
+const chalk = require("chalk");
+const figlet = require("figlet");
 
+//logo
+console.log(
+  chalk.green(
+    figlet.textSync("uni2vue", {
+      horizontalLayout: "Isometric1",
+      verticalLayout: "default",
+      width: 100,
+      whitespaceBreak: true,
+    })
+  )
+);
+
+//1.只能在有 node_modules 的项目中使用
+console.log(chalk.red.bold("此插件不会修改原项目代码,且只在vue2中测试过！"));
 //获取当前项目的文件路径
 const projectPath = path.resolve(__dirname.split("node_modules")[0]);
 //当前项目的文件名
@@ -27,11 +44,16 @@ function isFileExist(path, suffix = 1) {
 //判断文件夹是否存在  newProjectPath
 isFileExist(newProjectPath);
 
-console.log("正在下载模板中...");
+const spinner = ora().start();
+spinner.text = "请耐心等待,正在下载模板中...";
 
 //从仓库下载模板
 download("badspider7/uni-preset-vue", newProjectPath, function (err) {
-  console.log(err ? "Error" : "下载完成");
+  if (err) {
+    spinner.fail("下载失败,请尝试重新运行~");
+    return;
+  }
+  spinner.succeed("下载完成!");
   // })
 
   const ignoreFile = [
@@ -115,5 +137,5 @@ download("badspider7/uni-preset-vue", newProjectPath, function (err) {
     }
   });
 
-  console.log("转换完成!");
+  spinner.succeed("代码迁移完成,请打开文件夹查看!");
 });

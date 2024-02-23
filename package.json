@@ -1,28 +1,38 @@
 {
   "name": "uni2vue",
   "version": "1.0.0",
-  "description": "",
+  "description": "transforming projects created by uniapp into projects created by Vue-CLI",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
+  "bin": {
+    "mycli": "./bin/index.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "uni2vue": "node ./bin/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/badspider7/uni2vue.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "uniapp",
+    "vu2",
+    "uniapp2vue",
+    "cli"
+  ],
+  "author": "badspider",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/badspider7/uni2vue/issues"
   },
   "homepage": "https://github.com/badspider7/uni2vue#readme",
   "dependencies": {
-    "commander": "^12.0.0",
+    "chalk": "^4.1.2",
     "download-git-repo": "^3.0.2",
-    "fs-extra": "^11.2.0"
+    "figlet": "^1.7.0",
+    "fs-extra": "^11.2.0",
+    "ora": "^5.4.1"
   }
 }
